@@ -5,7 +5,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 dotenv.config();
 const server = express();
-const port = 8080 ;
+const port = process.env.port ;
 
 server.use(cors());
 server.use(bodyParser.json());
@@ -13,7 +13,7 @@ connectDb().catch(err => console.log(err));
 
 async function connectDb() {
     await mongoose.set("strictQuery", false);
-    await mongoose.connect("mongodb://0000:27017/logintushar", {
+    await mongoose.connect(process.env.db, {
         useUnifiedTopology: true,
         useNewUrlParser: true
     }).then(res=>{
